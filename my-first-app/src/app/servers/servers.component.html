@@ -1,0 +1,23 @@
+<label>Server Name: </label>
+<!-- <input type="text" (input)="onUserInput($event)"> -->
+<input 
+    type="text" 
+    class="formControl" 
+    [(ngModel)]="serverName">
+<br>
+<button 
+    class="btn btn-primary" 
+    [disabled]="!allowNewServer"
+    (click)="onCreateServer()">add server</button>
+<p *ngIf="isServerCreated; else noServer">{{serverCreated}} server name {{ serverName}}</p>
+<ng-template #noServer>
+    <p>no server was created!</p>
+</ng-template>
+
+<!-- <input type="text" class="formControl" [(ngModel)]="username">
+<p>{{ username }}</p>
+<button class="btn btn-primary" [disabled]="!username" (click)="onResetUsername()">Reset Username</button>
+ --><br/>
+<app-server *ngFor="let server of servers; let i = index"></app-server>
+<p *ngFor="let server of servers; let i = index"
+    [ngStyle]="{backgroundColor: getColor(i)}">This is even</p>

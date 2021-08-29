@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div id="userInput" ngModelGroup="userInput" #userInput="ngModelGroup">
+          <div class="form-group">
+            <label for="name">username:</label>
+            <input type="text" id="name" class="form-control" ngModel name="name" required>
+          </div>
+          <button type="button" class="btn btn-default" (click)="suggestUsername()">Suggest a username</button>
+          <div class="form-group">
+            <label for="email">email:</label>
+            <input type="email" id="email" class="form-control" ngModel name="email" required email #email="ngModel">
+            <span class="help-block" *ngIf="!email.valid && email.touched">Enter a valid email</span>
+          </div>
+        </div>
+        <p class="form-group" *ngIf="!userInput.valid && userInput.touched">input not valid</p>
+        <div class="form-group">
+          <label for="password">password:</label>
+          <input type="password" id="password" class="form-control" ngModel name="password">
+        </div>
+        <textarea name="questionAnswer" rows="3" class="form-control" [(ngModel)]="answer"></textarea>
+        <p>Your Input: {{ answer }}</p>
+        <div class="form-group">
+          <label for="secret">security question</label>
+          <select id="secret" class="form-control" [ngModel]= "defaultValue" name="secret">
+            <option value="pet">your favorite pet?</option>
+            <option value="car">your first car?</option>
+          </select>
+        </div>
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input type="radio" ngModel name="gender" [value]="gender">{{ gender}}
+          </label>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
